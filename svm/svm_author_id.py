@@ -31,7 +31,7 @@ from sklearn.metrics import accuracy_score
 # labels_train = labels_train[:len(labels_train)/100]
 
 c = 10000.0
-k = 'linear'
+k = 'rbf'
 
 clf = SVC(kernel=k, C=c)  # using default kernel 'rbf'
 
@@ -45,5 +45,9 @@ print "predicting time:", round(time()-t0, 3), "s"
 
 print "accuracy: ", accuracy_score(labels_test, pred)
 
+s=0
+for i in pred:
+    s += i
+print "number of Chris's emails: ", s
 
 #########################################################
