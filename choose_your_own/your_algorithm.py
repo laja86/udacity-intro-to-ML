@@ -28,14 +28,14 @@ plt.show() '''
 ################################################################################
 
 from time import time
-from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 
 ''' reduce size of training set '''
 # features_train = features_train[:len(features_train)/100]
 # labels_train = labels_train[:len(labels_train)/100]
 
-clf = AdaBoostClassifier(n_estimators=20, learning_rate=1.0)
+clf = RandomForestClassifier(n_estimators=1000, min_samples_split=10)
 
 t0 = time()
 clf.fit(features_train, labels_train)
