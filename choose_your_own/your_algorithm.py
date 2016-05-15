@@ -28,10 +28,17 @@ plt.show() '''
 ################################################################################
 
 from time import time
-from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score
 
-clf = GaussianNB()
+''' reduce size of training set '''
+# features_train = features_train[:len(features_train)/100]
+# labels_train = labels_train[:len(labels_train)/100]
+
+c = 100000.0
+k = 'rbf'
+
+clf = SVC(kernel=k, C=c)
 
 t0 = time()
 clf.fit(features_train, labels_train)
