@@ -28,14 +28,14 @@ plt.show() '''
 ################################################################################
 
 from time import time
-from sklearn import tree
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 
 ''' reduce size of training set '''
 # features_train = features_train[:len(features_train)/100]
 # labels_train = labels_train[:len(labels_train)/100]
 
-clf = tree.DecisionTreeClassifier(min_samples_split=20)
+clf = KNeighborsClassifier(n_neighbors=8, algorithm='auto')
 
 t0 = time()
 clf.fit(features_train, labels_train)
