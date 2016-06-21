@@ -21,7 +21,7 @@ dictionary = pickle.load( open("../final_project/final_project_dataset_modified.
 
 ### list the features you want to look at--first item in the
 ### list will be the "target" feature
-features_list = ["bonus", "long_term_incentive"]
+features_list = ["bonus", "salary"]
 data = featureFormat( dictionary, features_list, remove_any_zeroes=True)
 target, features = targetFeatureSplit( data )
 
@@ -40,8 +40,8 @@ from sklearn.linear_model import LinearRegression
 reg = LinearRegression()
 reg.fit(feature_train, target_train)
 
-print "slope: ", reg.coef_
-print "intercept: ", reg.intercept_
+print "slope for train reg.: ", reg.coef_
+print "intercept for train reg.: ", reg.intercept_
 
 print "\n######### stats on test dataset #########\n"
 print "r-squared score: ", reg.score(feature_test, target_test)
@@ -71,9 +71,17 @@ plt.scatter(feature_test[0], target_test[0], color=train_color, label="train")
 
 ### draw the regression line, once it's coded
 try:
-    plt.plot( feature_test, reg.predict(feature_test) )
+    plt.plot( feature_test, reg.predict(feature_test), color=test_color)
 except NameError:
     pass
+# hack to see results without an outlier
+reg.fit(feature_test, target_test)
+print "\nslope for test reg.: ", reg.coef_
+print "intercept for test reg.: ", reg.intercept_
+plt.plot(feature_train, reg.predict(feature_train), color=train_color)
+
+
+
 plt.xlabel(features_list[1])
 plt.ylabel(features_list[0])
 plt.legend()
