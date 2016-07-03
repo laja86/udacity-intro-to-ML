@@ -18,12 +18,23 @@ def computeFraction( poi_messages, all_messages ):
     ### beware of "NaN" when there is no known email address (and so
     ### no filled email features), and integer division!
     ### in case of poi_messages or all_messages having "NaN" value, return 0.
-    fraction = 0.
 
+    if all_messages == 'NaN':
+        return 0.
+    elif poi_messages == 'NaN':
+        return 0.
+    # else:
+    #     return poi_messages / (all_messages * 1.0)
 
+    try:
+        return poi_messages / (all_messages * 1.0)
+    except Exception as e:
+            if str(e) == "ZeroDivisonError":
+                return 0.
+            else:
+                raise e
 
-    return fraction
-
+    # return fraction
 
 data_dict = getData()
 
