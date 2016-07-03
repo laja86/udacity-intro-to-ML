@@ -1,4 +1,4 @@
-#!/usr/bin/python
+# # !/usr/bin/python
 
 ###
 ### in poiFlagEmail() below, write code that returns a boolean
@@ -6,7 +6,9 @@
 ###
 
 import sys
-import reader
+# Note that "reader.py" and "poi_emails.py" imported by the grader are not
+# available for editing, and are called when a Test Run or Submit is made.
+import reader  # includes parseAddresses function
 import poi_emails
 
 def getToFromStrings(f):
@@ -19,6 +21,8 @@ def getToFromStrings(f):
     '''
     f.seek(0)
     to_string, from_string, cc_string   = reader.getAddresses(f)
+
+    # I assume this returns a list based on to_emails processing below
     to_emails   = reader.parseAddresses( to_string )
     from_emails = reader.parseAddresses( from_string )
     cc_emails   = reader.parseAddresses( cc_string )
@@ -26,8 +30,7 @@ def getToFromStrings(f):
     return to_emails, from_emails, cc_emails
 
 
-### POI flag an email
-
+### POI flag an email, returns tuple of 3 bools
 def poiFlagEmail(f):
     """ given an email file f,
         return a trio of booleans for whether that email is
@@ -48,8 +51,10 @@ def poiFlagEmail(f):
 
     ### there can be many "to" emails, but only one "from", so the
     ### "to" processing needs to be a little more complicated
+    #       uses counter for iteration, duplicates process for cc_emails
+    #           does not seem very pythonic, but maybe clearest method
     if to_emails:
-        ctr = 0
+        ctr = 0  # counter for iterating through, perhaps not pythonic
         while not to_poi and ctr < len(to_emails):
             if to_emails[ctr] in poi_email_list:
                 to_poi = True
@@ -67,6 +72,16 @@ def poiFlagEmail(f):
     ### set from_poi to True if #####
     ### the email is from a POI #####
     #################################
+    # initial difficulty getting correct output because I was not
+    #   I had from_email in... instead of from_emails[0] in...
+    #   (needs item index for list, even though only one item in list)
+    assert len(from_emails) == 1
+    from_poi = True if from_emails[0] in poi_email_list else False
+
+    # assert from_emails == True
+    # if from_emails:
+    #   if from_emails[0] in poi_email_list:
+    #       from_poi = True
 
 
 
