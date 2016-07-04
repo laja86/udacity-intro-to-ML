@@ -60,7 +60,8 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
 
             ### use str.replace() to remove any instances of the words
             ### ["sara", "shackleton", "chris", "germani"] i.e. signature words
-            signature_words = ["sara", "shackleton", "chris", "germani"]
+            signature_words = ["sara", "shackleton", "sshacklensf",
+                               "chris", "germani", "cgermannsf"]
             for s in signature_words:
                 preprocessed_email = preprocessed_email.replace(s, '')
 
