@@ -27,6 +27,6 @@ labels, features = targetFeatureSplit(data)
 
 
 
-### it's all yours from here forward!  
+### it's all yours from here forward!
 
-
+# See jupyter notebook for Lesson 13 for code
